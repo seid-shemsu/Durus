@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,34 +46,15 @@ public class UstazAdapter extends RecyclerView.Adapter<UstazAdapter.Holder> {
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.single_ustaz_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.single_course_item, parent, false);
         return new Holder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         final UstazObject ustazObject = ustazObjects.get(position);
-        File img = context.getApplicationContext().getFileStreamPath(ustazObject.getName());
-        if (img.exists()) {
-            holder.img.setImageBitmap(loadImage(context, ustazObject.getName()));
-        } else {
-            Picasso.get().load(ustazObject.getImg()).into(holder.img);
-            try {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Looper.prepare();
-                            saveImage(context, Picasso.get().load(ustazObject.getImg()).get(), ustazObject.getName());
-                        } catch (IOException e) {
-                            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }).start();
-            } catch (Exception e) {
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
+        Picasso.get().load(ustazObject.getImg()).into(holder.img);
+        holder.name.setText(ustazObject.getName());
     }
 
     @Override
@@ -82,22 +64,23 @@ public class UstazAdapter extends RecyclerView.Adapter<UstazAdapter.Holder> {
 
     public class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView img;
+        TextView name;
 
         private Holder(@NonNull View itemView) {
             super(itemView);
-            img = itemView.findViewById(R.id.img);
+            img = itemView.findViewById(R.id.course_img);
+            name = itemView.findViewById(R.id.course_name);
             img.setOnClickListener(this);
+            name.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             try {
-                if (AdMob.getInstance(context).adSuccessfulLoadedState.getValue() ==  true) {
-                    Log.e("Ad", "-----------------true");
+                if (Boolean.TRUE.equals(AdMob.getInstance(context).adSuccessfulLoadedState.getValue())) {
                     AdMob.getInstance(context).showRewardedVideo(context, () -> context.startActivity(new Intent(context, CourseActivity.class)
                             .putExtra("ustaz", ustazObjects.get(getAdapterPosition()).getName())));
                 } else {
-                    Log.e("Ad", "-----------------false");
                     context.startActivity(new Intent(context, CourseActivity.class)
                             .putExtra("ustaz", ustazObjects.get(getAdapterPosition()).getName()));
                 }

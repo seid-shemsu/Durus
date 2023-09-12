@@ -45,14 +45,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
     @NonNull
     @Override
     public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.single_course_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.single_ustaz_item, parent, false);
         return new ImageViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
         final CourseObject courseObject = courseObjects.get(position);
-        holder.course_name.setText(courseObject.getCourse_name());
+        //holder.course_name.setText(courseObject.getCourse_name());
         Picasso.get().load(courseObject.getImg_url()).into(holder.course_img);
     }
 
@@ -63,16 +63,16 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
 
     public class ImageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView course_img;
-        TextView course_name;
+        //TextView course_name;
         CardView relative;
 
         private ImageViewHolder(@NonNull View itemView) {
             super(itemView);
-            course_img = itemView.findViewById(R.id.course_img);
-            course_name = itemView.findViewById(R.id.course_name);
+            course_img = itemView.findViewById(R.id.img);
+            //course_name = itemView.findViewById(R.id.course_name);
             relative = itemView.findViewById(R.id.relative);
 
-            course_name.setOnClickListener(this);
+            //course_name.setOnClickListener(this);
             course_img.setOnClickListener(this);
             relative.setOnClickListener(this);
             //attendants.setOnClickListener(this);
@@ -80,8 +80,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
 
         @Override
         public void onClick(View v) {
-            Log.e("Name", "-------------------------------------------------");
-            Log.e("Name", courseObjects.get(getAdapterPosition()).getCourse_name());
             try {
                 if (Boolean.TRUE.equals(AdMob.getInstance(context).adSuccessfulLoadedState.getValue())) {
                     AdMob.getInstance(context)

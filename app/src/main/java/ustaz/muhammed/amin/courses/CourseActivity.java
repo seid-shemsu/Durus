@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -45,21 +46,19 @@ public class CourseActivity extends AppCompatActivity {
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.my_statusbar_color));
-        setContentView(R.layout.activity_kitab);
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.my_statusbar_color));
         Objects.requireNonNull(getSupportActionBar()).hide();
-        //ustaz = getIntent().getExtras().getString("ustaz");
+        setContentView(R.layout.activity_kitab);
+        ustaz = getIntent().getExtras().getString("ustaz");
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         progressBar = findViewById(R.id.progress_bar);
-        /*databaseReference = FirebaseDatabase.getInstance().
-                getReference("Durus").child("derses")
-                .child(ustaz);*/
         databaseReference = FirebaseDatabase.getInstance().
-                getReference("titles");
-                /*.child("derses")
-                .child(ustaz);*/
+                getReference("content")
+                .child(ustaz)
+                .child("titles")
+        ;
         addCourses();
 
     }

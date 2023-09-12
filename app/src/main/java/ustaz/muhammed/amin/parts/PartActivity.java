@@ -47,7 +47,6 @@ public class PartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Window window = getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -70,7 +69,10 @@ public class PartActivity extends AppCompatActivity {
     private void getItems() {
         //DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Durus").child("content").child(ustaz).child(course_name);
         DatabaseReference databaseReference = FirebaseDatabase.getInstance()
-                .getReference("contents")
+                .getReference()
+                .child("content")
+                .child(ustaz)
+                .child("contents")
                 .child(course_name);
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

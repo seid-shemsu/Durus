@@ -2,11 +2,15 @@ package ustaz.muhammed.amin.ustaz;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -18,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import ustaz.muhammed.amin.R;
 import ustaz.muhammed.amin.admob.AdMob;
@@ -32,13 +37,17 @@ public class UstazActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(getResources().getString(R.string.app_name));
+        Window window = getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.my_statusbar_color));
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_ustaz);
         recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         progressBar = findViewById(R.id.progress_bar);
-        databaseReference = FirebaseDatabase.getInstance().getReference("Durus").child("ustazs");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("ustaz");
         addUstaz();
     }
 
@@ -49,7 +58,7 @@ public class UstazActivity extends AppCompatActivity {
                 ustazObjects.clear();
                 for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String name = snapshot.child("name").getValue().toString();
-                    String img_url = snapshot.child("img").getValue().toString();
+                    String img_url = snapshot.child("image").getValue().toString();
                     ustazObjects.add(new UstazObject(name, img_url));
                 }
                 UstazAdapter ustazAdapter = new UstazAdapter(UstazActivity.this, ustazObjects);
