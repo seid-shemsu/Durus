@@ -116,23 +116,22 @@
         </androidx.cardview.widget.CardView>
 
         <RelativeLayout
-            android:layout_width="300dp"
+            android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_margin="15dp">
 
             <TextView
                 android:id="@+id/audio"
-                android:layout_width="145dp"
+                android:layout_width="200dp"
                 android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
                 android:background="@drawable/backbtn"
-                android:drawableStart="@drawable/headset"
-                android:drawablePadding="10dp"
-                android:gravity="start|center_vertical"
-                android:paddingStart="25dp"
+                android:gravity="center"
                 android:text="@string/listen_audio"
-                android:textColor="@color/white" />
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
 
             <TextView
@@ -147,7 +146,8 @@
                 android:paddingStart="25dp"
                 android:paddingEnd="15dp"
                 android:text="@string/read_pdf"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:visibility="gone" />
         </RelativeLayout>
     </LinearLayout>
 

@@ -16,28 +16,28 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-9027325451795162~7928458537" />
         <activity
-            android:name=".player.VideoPlayManager"
+            android:name="ustaz.muhammed.amin.player.VideoPlayManager"
             android:exported="false" />
         <activity
-            android:name=".reader.Reader"
+            android:name="ustaz.muhammed.amin.reader.Reader"
             android:exported="false" />
         <activity
-            android:name=".detail.DetailActivity"
+            android:name="ustaz.muhammed.amin.detail.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".parts.PartActivity"
+            android:name="ustaz.muhammed.amin.parts.PartActivity"
             android:exported="false" />
         <activity
-            android:name=".courses.CourseActivity"
+            android:name="ustaz.muhammed.amin.courses.CourseActivity"
             android:exported="false" />
         <activity
-            android:name=".ustaz.UstazActivity"
+            android:name="ustaz.muhammed.amin.ustaz.UstazActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="ustaz.muhammed.amin.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Splash"
+            android:name="ustaz.muhammed.amin.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

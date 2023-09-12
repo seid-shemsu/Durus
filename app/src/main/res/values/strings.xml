@@ -8,7 +8,7 @@
     <string name="connet_internet">please connect to internet</string>
     <string name="registered_successfully">registered successfully</string>
     <string name="name">Name</string>
-    <string name="listen_audio">listen</string>
+    <string name="listen_audio">Download Audio</string>
     <string name="read_pdf">Read</string>
     <string name="get_started">get started</string>
     <string name="email">Email</string>

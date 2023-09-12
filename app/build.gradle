@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'et.islam.durus'
+    namespace 'ustaz.muhammed.amin'
     compileSdk 33
 
     defaultConfig {
-        applicationId "et.islam.durus"
+        applicationId "ustaz.muhammed.amin"
         minSdk 23
         targetSdk 33
         versionCode 1
