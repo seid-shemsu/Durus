@@ -3,6 +3,7 @@ package ustaz.muhammed.amin.parts;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import ustaz.muhammed.amin.R;
 import ustaz.muhammed.amin.detail.DetailActivity;
+import ustaz.muhammed.amin.player.MusicPlayerActivity;
 import ustaz.muhammed.amin.player.VideoPlayManager;
 
 public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
@@ -50,9 +52,10 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
         //I have changed passed with lesson sharedPreference
         PartObject part = parts.get(position);
         holder.title.setText(part.getName());
-        Picasso.get().load(image).into(holder.image);
-        if (part.getName().equalsIgnoreCase("music"))
-            holder.download.setVisibility(View.GONE);
+        Picasso.get().load(image).into(holder.img);
+        Log.e("Music", "----------------------------------------------" + position);
+        Log.e("Music", part.getMusic());
+        if (part.getMusic().equalsIgnoreCase("music")) holder.download.setVisibility(View.GONE);
     }
 
     @Override
@@ -62,20 +65,26 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
 
     public class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView title;
-        ImageView youtube, download, image;
+        ImageView youtube, download, img;
         LinearLayout musicPlayer;
+
         public Holder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
 
             youtube = itemView.findViewById(R.id.youtube);
             download = itemView.findViewById(R.id.download);
-            image = itemView.findViewById(R.id.image);
+            img = itemView.findViewById(R.id.image);
 
             musicPlayer = itemView.findViewById(R.id.musicplayer);
 
             download.setOnClickListener(v -> {
-                musicPlayer.setVisibility(View.VISIBLE);
+                context.startActivity(new Intent(context, MusicPlayerActivity.class)
+                        .putExtra("audio_link", parts.get(getAdapterPosition()).getMusic())
+                        .putExtra("course_name", name)
+                        .putExtra("image", image)
+                        .putExtra("part_number", Integer.toString(getAdapterPosition() + 1))
+                );
             });
             youtube.setOnClickListener(this);
 

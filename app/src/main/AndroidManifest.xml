@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,32 +15,37 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Durus"
         tools:targetApi="31">
+        <activity
+            android:name=".player.MusicPlayerActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9027325451795162~7928458537" />
+            android:value="ca-app-pub-9737688387656254~9905655112" />
+
         <activity
-            android:name="ustaz.muhammed.amin.player.VideoPlayManager"
+            android:name=".player.VideoPlayManager"
             android:exported="false" />
         <activity
-            android:name="ustaz.muhammed.amin.reader.Reader"
+            android:name=".reader.Reader"
             android:exported="false" />
         <activity
-            android:name="ustaz.muhammed.amin.detail.DetailActivity"
+            android:name=".detail.DetailActivity"
             android:exported="false" />
         <activity
-            android:name="ustaz.muhammed.amin.parts.PartActivity"
+            android:name=".parts.PartActivity"
             android:exported="false" />
         <activity
-            android:name="ustaz.muhammed.amin.courses.CourseActivity"
+            android:name=".courses.CourseActivity"
             android:exported="false" />
         <activity
-            android:name="ustaz.muhammed.amin.ustaz.UstazActivity"
+            android:name=".ustaz.UstazActivity"
             android:exported="false" />
         <activity
-            android:name="ustaz.muhammed.amin.MainActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name="ustaz.muhammed.amin.Splash"
+            android:name=".Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

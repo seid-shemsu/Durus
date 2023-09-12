@@ -52,24 +52,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
         final CourseObject courseObject = courseObjects.get(position);
         holder.course_name.setText(courseObject.getCourse_name());
-        File img = context.getApplicationContext().getFileStreamPath("course" + courseObject.getCourse_name());
-        if (img.exists()) {
-            holder.course_img.setImageBitmap(loadImage(context, "course" + courseObject.getCourse_name()));
-        } else {
-            Picasso.get().load(courseObject.getImg_url()).into(holder.course_img);
-            try {
-                new Thread(() -> {
-                    try {
-                        Looper.prepare();
-                        saveImage(context, Picasso.get().load(courseObject.getImg_url()).get(), "course" + courseObject.getCourse_name());
-                    } catch (IOException e) {
-                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }).start();
-            } catch (Exception e) {
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
+        Picasso.get().load(courseObject.getImg_url()).into(holder.course_img);
     }
 
     @Override
