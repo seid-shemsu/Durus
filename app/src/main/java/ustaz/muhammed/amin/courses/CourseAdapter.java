@@ -82,7 +82,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
             Log.e("Name", "-------------------------------------------------");
             Log.e("Name", courseObjects.get(getAdapterPosition()).getCourse_name());
             try {
-                if (AdMob.getInstance(context).adSuccessfulLoadedState.getValue()) {
+                if (Boolean.TRUE.equals(AdMob.getInstance(context).adSuccessfulLoadedState.getValue())) {
                     AdMob.getInstance(context)
                             .showRewardedVideo(context, () -> context.startActivity(new Intent(context, PartActivity.class)
                                     .putExtra("ustaz", ustaz)

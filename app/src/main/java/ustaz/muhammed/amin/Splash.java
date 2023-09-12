@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.ads.MobileAds;
 
+import java.util.Objects;
+
 import ustaz.muhammed.amin.admob.AdMob;
 import ustaz.muhammed.amin.courses.CourseActivity;
 import ustaz.muhammed.amin.ustaz.UstazActivity;
@@ -16,7 +18,7 @@ public class Splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_splash);
         MobileAds.initialize(this);
         AdMob.getInstance(this);

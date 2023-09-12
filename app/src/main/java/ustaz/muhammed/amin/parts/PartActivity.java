@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import ustaz.muhammed.amin.R;
 
@@ -43,6 +44,7 @@ public class PartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_part);
         title = findViewById(R.id.title_recycler);
         progress = findViewById(R.id.progress_bar);

@@ -23,6 +23,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import ustaz.muhammed.amin.R;
+import ustaz.muhammed.amin.admob.AdMob;
 import ustaz.muhammed.amin.detail.DetailActivity;
 import ustaz.muhammed.amin.player.MusicPlayerActivity;
 import ustaz.muhammed.amin.player.VideoPlayManager;
@@ -79,12 +80,16 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
             musicPlayer = itemView.findViewById(R.id.musicplayer);
 
             download.setOnClickListener(v -> {
-                context.startActivity(new Intent(context, MusicPlayerActivity.class)
-                        .putExtra("audio_link", parts.get(getAdapterPosition()).getMusic())
-                        .putExtra("course_name", name)
-                        .putExtra("image", image)
-                        .putExtra("part_number", Integer.toString(getAdapterPosition() + 1))
-                );
+                try {
+                    if (Boolean.TRUE.equals(AdMob.getInstance(context).adSuccessfulLoadedState.getValue())) {
+                        AdMob.getInstance(context).showRewardedVideo(context, () -> context.startActivity(new Intent(context, MusicPlayerActivity.class).putExtra("audio_link", parts.get(getAdapterPosition()).getMusic()).putExtra("course_name", name).putExtra("image", image).putExtra("part_number", Integer.toString(getAdapterPosition() + 1))));
+                    } else {
+                        context.startActivity(new Intent(context, MusicPlayerActivity.class).putExtra("audio_link", parts.get(getAdapterPosition()).getMusic()).putExtra("course_name", name).putExtra("image", image).putExtra("part_number", Integer.toString(getAdapterPosition() + 1)));
+                    }
+                } catch (Exception e) {
+                    context.startActivity(new Intent(context, MusicPlayerActivity.class).putExtra("audio_link", parts.get(getAdapterPosition()).getMusic()).putExtra("course_name", name).putExtra("image", image).putExtra("part_number", Integer.toString(getAdapterPosition() + 1)));
+                }
+
             });
             youtube.setOnClickListener(this);
 
@@ -93,7 +98,16 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
         @Override
         public void onClick(View v) {
             //context.startActivity(new Intent(context, DetailActivity.class).putExtra("ustaz", ustaz).putExtra("course_name", name).putExtra("part_number", Integer.toString(getAdapterPosition() + 1)));
-            context.startActivity(new Intent(context, VideoPlayManager.class).putExtra("link", parts.get(getAdapterPosition()).getYoutube()));
+
+            try {
+                if (Boolean.TRUE.equals(AdMob.getInstance(context).adSuccessfulLoadedState.getValue())) {
+                    AdMob.getInstance(context).showRewardedVideo(context, () -> context.startActivity(new Intent(context, VideoPlayManager.class).putExtra("link", parts.get(getAdapterPosition()).getYoutube())));
+                } else {
+                    context.startActivity(new Intent(context, VideoPlayManager.class).putExtra("link", parts.get(getAdapterPosition()).getYoutube()));
+                }
+            } catch (Exception e) {
+                context.startActivity(new Intent(context, VideoPlayManager.class).putExtra("link", parts.get(getAdapterPosition()).getYoutube()));
+            }
         }
     }
 }

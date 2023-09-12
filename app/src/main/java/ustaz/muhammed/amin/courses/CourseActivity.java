@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import ustaz.muhammed.amin.R;
 
@@ -38,6 +39,7 @@ public class CourseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kitab);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         //ustaz = getIntent().getExtras().getString("ustaz");
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);

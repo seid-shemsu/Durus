@@ -9,26 +9,33 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTubePlayerUtils;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import java.util.Objects;
+
 import ustaz.muhammed.amin.R;
+import ustaz.muhammed.amin.admob.AdMob;
 
 public class VideoPlayManager extends AppCompatActivity {
     String videoId;
     private YouTubePlayerView youTubePlayerView;
     private FullScreenHelper fullScreenHelper = new FullScreenHelper(this);
 
+    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917"; // DEV
+    //private static final String AD_UNIT_ID = "ca-app-pub-9737688387656254/9630322947"; // PROD
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
+        Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_video_play_manager);
-        //setTitle(getIntent().getExtras().getString("title"));
         youTubePlayerView = findViewById(R.id.youtube_player_view);
         videoId = getIntent().getExtras().getString("link");
 
@@ -38,9 +45,6 @@ public class VideoPlayManager extends AppCompatActivity {
     private void initYouTubePlayerView() {
 
 
-        // The player will automatically release itself when the activity is destroyed.
-        // The player will automatically pause when the activity is stopped
-        // If you don't add YouTubePlayerView as a lifecycle observer, you will have to release it manually.
         try {
             getLifecycle().addObserver(youTubePlayerView);
             youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
@@ -83,12 +87,6 @@ public class VideoPlayManager extends AppCompatActivity {
             youTubePlayerView.exitFullScreen();
         else
             super.onBackPressed();
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
     }
 
     @Override
