@@ -16,6 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import ustaz.muhammed.amin.R;
@@ -26,12 +29,13 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
 
     Context context;
     List<PartObject> parts;
-    String name;
+    String name, image;
 
-    public TitleAdapter(Context context, List<PartObject> parts, String name) {
+    public TitleAdapter(Context context, List<PartObject> parts, String name, String image) {
         this.context = context;
         this.name = name;
         this.parts = parts;
+        this.image = image;
     }
 
     @NonNull
@@ -46,6 +50,7 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
         //I have changed passed with lesson sharedPreference
         PartObject part = parts.get(position);
         holder.title.setText(part.getName());
+        Picasso.get().load(image).into(holder.image);
         if (part.getName().equalsIgnoreCase("music"))
             holder.download.setVisibility(View.GONE);
     }

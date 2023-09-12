@@ -33,7 +33,7 @@ public class PartActivity extends AppCompatActivity {
     private List<String> numbers = new ArrayList<>();
     private List<String> icons = new ArrayList<>();
     private List<PartObject> parts = new ArrayList<>();
-    private String ustaz = "_", course_name = "_";
+    private String ustaz = "_", course_name = "_", image = "_";
     //LinearLayout lb;
     TitleAdapter titleAdapter;
     LinearLayout l;
@@ -51,6 +51,7 @@ public class PartActivity extends AppCompatActivity {
         title.setLayoutManager(new LinearLayoutManager(this));
         course_name = getIntent().getExtras().getString("course_name");
         ustaz = getIntent().getExtras().getString("ustaz");
+        image = getIntent().getExtras().getString("image");
         setTitle(course_name);
         getItems();
     }
@@ -71,7 +72,7 @@ public class PartActivity extends AppCompatActivity {
                             parts.add(snapshot.getValue(PartObject.class));
                         }
                     }
-                    titleAdapter = new TitleAdapter(PartActivity.this, parts, course_name);
+                    titleAdapter = new TitleAdapter(PartActivity.this, parts, course_name, image);
                     title.setAdapter(titleAdapter);
                     //l.setVisibility(View.VISIBLE);
                     progress.setVisibility(View.GONE);

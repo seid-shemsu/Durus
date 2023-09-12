@@ -104,11 +104,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
                             .showRewardedVideo(context, () -> context.startActivity(new Intent(context, PartActivity.class)
                                     .putExtra("ustaz", ustaz)
                                     .putExtra("course_name", courseObjects.get(getAdapterPosition()).getCourse_name())
+                                    .putExtra("image", courseObjects.get(getAdapterPosition()).getImg_url())
                             ));
                 } else {
                     context.startActivity(new Intent(context, PartActivity.class)
                             .putExtra("ustaz", ustaz)
                             .putExtra("course_name", courseObjects.get(getAdapterPosition()).getCourse_name())
+                            .putExtra("image", courseObjects.get(getAdapterPosition()).getImg_url())
                     );
                 }
             } catch (Exception e) {
@@ -116,6 +118,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
                 context.startActivity(new Intent(context, PartActivity.class)
                         .putExtra("ustaz", ustaz)
                         .putExtra("course_name", courseObjects.get(getAdapterPosition()).getCourse_name())
+                        .putExtra("image", courseObjects.get(getAdapterPosition()).getImg_url())
                 );
             }
 

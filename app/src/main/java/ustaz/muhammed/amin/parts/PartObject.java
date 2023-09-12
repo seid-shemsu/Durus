@@ -1,15 +1,16 @@
 package ustaz.muhammed.amin.parts;
 
 public class PartObject {
-    String name, music, youtube;
+    String name, music, youtube, image;
 
     public PartObject() {
     }
 
-    public PartObject(String name, String music, String youtube) {
+    public PartObject(String name, String music, String youtube, String image) {
         this.name = name;
         this.music = music;
         this.youtube = youtube;
+        this.image = image;
     }
 
     public String getName() {
@@ -34,5 +35,13 @@ public class PartObject {
 
     public void setYoutube(String youtube) {
         this.youtube = youtube;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
