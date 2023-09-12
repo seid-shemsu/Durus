@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,8 +91,21 @@ public class UstazAdapter extends RecyclerView.Adapter<UstazAdapter.Holder> {
 
         @Override
         public void onClick(View v) {
-            AdMob.getInstance(context).showRewardedVideo(context, () -> context.startActivity(new Intent(context, CourseActivity.class)
-                    .putExtra("ustaz", ustazObjects.get(getAdapterPosition()).getName())));
+            try {
+                if (AdMob.getInstance(context).adSuccessfulLoadedState.getValue() ==  true) {
+                    Log.e("Ad", "-----------------true");
+                    AdMob.getInstance(context).showRewardedVideo(context, () -> context.startActivity(new Intent(context, CourseActivity.class)
+                            .putExtra("ustaz", ustazObjects.get(getAdapterPosition()).getName())));
+                } else {
+                    Log.e("Ad", "-----------------false");
+                    context.startActivity(new Intent(context, CourseActivity.class)
+                            .putExtra("ustaz", ustazObjects.get(getAdapterPosition()).getName()));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                context.startActivity(new Intent(context, CourseActivity.class)
+                        .putExtra("ustaz", ustazObjects.get(getAdapterPosition()).getName()));
+            }
         }
     }
 

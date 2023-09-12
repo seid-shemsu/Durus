@@ -95,11 +95,26 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
 
         @Override
         public void onClick(View v) {
-            AdMob.getInstance(context)
-                    .showRewardedVideo(context, () -> context.startActivity(new Intent(context, PartActivity.class)
+            try {
+                if (AdMob.getInstance(context).adSuccessfulLoadedState.getValue()) {
+                    AdMob.getInstance(context)
+                            .showRewardedVideo(context, () -> context.startActivity(new Intent(context, PartActivity.class)
+                                    .putExtra("ustaz", ustaz)
+                                    .putExtra("course_name", courseObjects.get(getAdapterPosition()).getCourse_name())
+                            ));
+                } else {
+                    context.startActivity(new Intent(context, PartActivity.class)
                             .putExtra("ustaz", ustaz)
                             .putExtra("course_name", courseObjects.get(getAdapterPosition()).getCourse_name())
-                    ));
+                    );
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                context.startActivity(new Intent(context, PartActivity.class)
+                        .putExtra("ustaz", ustaz)
+                        .putExtra("course_name", courseObjects.get(getAdapterPosition()).getCourse_name())
+                );
+            }
 
         }
     }
