@@ -9,4 +9,5 @@
     <color name="bunny">#fff85f4f</color>
     <color name="green">#ff36af0a</color>
     <color name="user">#26F17C04</color>
+    <color name="my_statusbar_color">#192D39</color>
 </resources>

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -63,7 +64,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
     public class ImageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView course_img;
         TextView course_name;
-        RelativeLayout relative;
+        CardView relative;
 
         private ImageViewHolder(@NonNull View itemView) {
             super(itemView);

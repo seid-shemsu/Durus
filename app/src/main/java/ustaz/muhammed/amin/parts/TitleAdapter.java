@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,9 +52,15 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         //I have changed passed with lesson sharedPreference
+
         PartObject part = parts.get(position);
         holder.title.setText(part.getName());
-        Picasso.get().load(image).into(holder.img);
+        try {
+            Picasso.get().load(context.getString(R.string.thumbnail, part.getYoutube())).into(holder.img);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Picasso.get().load(image).into(holder.img);
+        }
         Log.e("Music", "----------------------------------------------" + position);
         Log.e("Music", part.getMusic());
         if (part.getMusic().equalsIgnoreCase("music")) holder.download.setVisibility(View.GONE);
@@ -67,7 +74,8 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
     public class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView title;
         ImageView youtube, download, img;
-        LinearLayout musicPlayer;
+
+        CardView card;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
@@ -76,8 +84,7 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
             youtube = itemView.findViewById(R.id.youtube);
             download = itemView.findViewById(R.id.download);
             img = itemView.findViewById(R.id.image);
-
-            musicPlayer = itemView.findViewById(R.id.musicplayer);
+            card = itemView.findViewById(R.id.card);
 
             download.setOnClickListener(v -> {
                 try {
@@ -92,6 +99,7 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
 
             });
             youtube.setOnClickListener(this);
+            card.setOnClickListener(this);
 
         }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Durus</string>
+    <string name="app_name">Medreseti Muhammed Amin Adem</string>
 
     <string name="attemt_all_question">please attempt  all the question.</string>
     <string name="saved_to_phone">saved to africa/certificates folder</string>
@@ -130,4 +130,5 @@
     <string name="congratulation_n_next_part_is_unlocked">next part is unlocked</string>
     <string name="submit">submit</string>
 
+    <string name="thumbnail">https://i.ytimg.com/vi/%1$s/maxresdefault.jpg</string>
 </resources>
