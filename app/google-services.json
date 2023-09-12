@@ -1,26 +1,44 @@
 {
   "project_info": {
-    "project_number": "753593912175",
-    "project_id": "ustaz-muhammed-amin",
-    "storage_bucket": "ustaz-muhammed-amin.appspot.com"
+    "project_number": "418145904669",
+    "firebase_url": "https://albukhari-2d625.firebaseio.com",
+    "project_id": "albukhari-2d625",
+    "storage_bucket": "albukhari-2d625.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:753593912175:android:e446020efe63b464d1769a",
+        "mobilesdk_app_id": "1:418145904669:android:36209c8860e1afd00e7ef4",
         "android_client_info": {
-          "package_name": "ustaz.muhammed.amin"
+          "package_name": "ethio.islamic.durus"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "418145904669-krgsk8j0cc8919ggh60keg7s0teogsd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyAKkub8VgnTS8cudu7-FbAReCLOpKpdMQk"
+          "current_key": "AIzaSyDlKbX4YnjWz-LV1mBsZYJEzIOVE0ynGrQ"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418145904669-krgsk8j0cc8919ggh60keg7s0teogsd7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "418145904669-ff9k8eaug7b03gvhprfqlsq4q77b7hts.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterApp1"
+              }
+            }
+          ]
         }
       }
     }
