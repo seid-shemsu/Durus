@@ -31,9 +31,6 @@
             android:configChanges="orientation|screenSize|keyboardHidden|screenLayout"
             android:exported="false" />
         <activity
-            android:name=".reader.Reader"
-            android:exported="false" />
-        <activity
             android:name=".detail.DetailActivity"
             android:exported="false" />
         <activity

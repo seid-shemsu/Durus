@@ -1,6 +1,8 @@
 package ethio.islamic.durus.courses;
 
-public class CourseObject {
+import java.io.Serializable;
+
+public class CourseObject implements Serializable {
     String course_name, img_url;
 
     public CourseObject(String course_name, String img_url) {

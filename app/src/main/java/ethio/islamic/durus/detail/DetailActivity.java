@@ -45,7 +45,6 @@ import java.util.concurrent.TimeUnit;
 import ethio.islamic.durus.R;
 import ethio.islamic.durus.player.MusicManager;
 import ethio.islamic.durus.player.VideoPlayManager;
-import ethio.islamic.durus.reader.Reader;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -92,14 +91,6 @@ public class DetailActivity extends AppCompatActivity {
                 requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
             }
         });
-        pdf.setOnClickListener(v -> {
-            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                downloadPdf();
-            } else {
-                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-            }
-        });
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         linearLayout = findViewById(R.id.musicplayer);
         startTimeField = findViewById(R.id.starttime);
@@ -138,55 +129,6 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
-    private void downloadPdf() {
-        try {
-            String root = Environment.getExternalStorageDirectory().toString();
-            File dir = new File(root + "/Durus/" + ustaz + "/" + course_name + "/pdfs");
-            if (!dir.exists())
-                dir.mkdirs();
-            final File file = new File(dir, ustaz + "_" + course_name + "_" + part_number + ".pdf");
-            if (file.isFile() && file.length() > 0) {
-                startActivity(new Intent(DetailActivity.this, Reader.class)
-                        .putExtra("file", file.toString()));
-            } else {
-                final Dialog dialog = new Dialog(this);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.setContentView(R.layout.wait);
-                dialog.setCanceledOnTouchOutside(false);
-                dialog.show();
-                try {
-                    StorageReference storageReference = FirebaseStorage.getInstance().getReference(pdf_link);
-                    if (!file.exists())
-                        file.createNewFile();
-                    storageReference.getFile(file)
-                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                    dialog.dismiss();
-                                    startActivity(new Intent(DetailActivity.this, Reader.class).putExtra("file", file.toString()));
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    dialog.dismiss();
-                                    if (e.getMessage().contains("location"))
-                                        Toast.makeText(DetailActivity.this, getString(R.string.file_not_exist), Toast.LENGTH_SHORT).show();
-
-                                }
-                            });
-                } catch (Exception e) {
-                    dialog.dismiss();
-                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
-                    Toast.makeText(DetailActivity.this, getString(R.string.try_again), Toast.LENGTH_SHORT).show();
-                }
-            }
-        } catch (Exception e) {
-            Toast.makeText(DetailActivity.this, "ERROR 103\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
     private void getLinks() {
         try {

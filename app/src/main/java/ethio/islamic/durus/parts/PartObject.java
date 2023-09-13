@@ -1,6 +1,8 @@
 package ethio.islamic.durus.parts;
 
-public class PartObject {
+import java.io.Serializable;
+
+public class PartObject implements Serializable {
     String name, music, youtube, image;
 
     public PartObject() {

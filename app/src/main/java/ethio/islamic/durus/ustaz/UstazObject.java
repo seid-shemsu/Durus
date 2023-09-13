@@ -1,6 +1,8 @@
 package ethio.islamic.durus.ustaz;
 
-public class UstazObject {
+import java.io.Serializable;
+
+public class UstazObject implements Serializable {
     String name, img;
 
     public UstazObject() {
