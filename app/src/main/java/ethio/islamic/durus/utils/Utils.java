@@ -22,7 +22,6 @@ public class Utils {
     }
 
     public static boolean showAd(Context context) {
-        return context.getSharedPreferences("ad", Context.MODE_PRIVATE)
-                .getBoolean("show", false);
+        return context.getSharedPreferences("ad", Context.MODE_PRIVATE).getBoolean("show", false);
     }
 }

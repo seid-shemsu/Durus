@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,6 +51,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
         final CourseObject courseObject = courseObjects.get(position);
         //holder.course_name.setText(courseObject.getCourse_name());
         Glide.with(holder.course_img).load(courseObject.getImg_url()).into(holder.course_img);
+        holder.title.setText(courseObject.getCourse_name());
     }
 
     @Override
@@ -62,13 +64,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
         //TextView course_name;
         CardView relative;
 
+        TextView title;
         private ImageViewHolder(@NonNull View itemView) {
             super(itemView);
             course_img = itemView.findViewById(R.id.img);
-            //course_name = itemView.findViewById(R.id.course_name);
+            title = itemView.findViewById(R.id.title);
             relative = itemView.findViewById(R.id.relative);
 
-            //course_name.setOnClickListener(this);
+            title.setOnClickListener(this);
             course_img.setOnClickListener(this);
             relative.setOnClickListener(this);
             //attendants.setOnClickListener(this);

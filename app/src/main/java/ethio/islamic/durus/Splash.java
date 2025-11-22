@@ -51,6 +51,11 @@ public class Splash extends AppCompatActivity {
                                     .edit()
                                     .putBoolean("show", true)
                                     .apply();
+                        } else {
+                            getSharedPreferences("ad", MODE_PRIVATE)
+                                    .edit()
+                                    .putBoolean("show", false)
+                                    .apply();
                         }
                     }
 

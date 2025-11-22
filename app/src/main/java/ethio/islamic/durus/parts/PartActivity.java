@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,17 +29,13 @@ import ethio.islamic.durus.R;
 
 public class PartActivity extends AppCompatActivity {
     private ProgressBar progress;
-    private RecyclerView title;
-    private List<String> titles = new ArrayList<>();
-    private List<String> numbers = new ArrayList<>();
-    private List<String> icons = new ArrayList<>();
+    private RecyclerView recycler;
     private List<PartObject> parts = new ArrayList<>();
     private String ustaz = "_", course_name = "_", image = "_";
     //LinearLayout lb;
     TitleAdapter titleAdapter;
-    LinearLayout l;
-    //private String[] numbersArray, titlesArray;
-    private int i = 0;
+    private ImageView back;
+    private TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +46,20 @@ public class PartActivity extends AppCompatActivity {
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.my_statusbar_color));
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_part);
-        title = findViewById(R.id.title_recycler);
+        recycler = findViewById(R.id.title_recycler);
         progress = findViewById(R.id.progress_bar);
-        l = findViewById(R.id.l);
-        title.setHasFixedSize(true);
-        title.setLayoutManager(new LinearLayoutManager(this));
+        recycler.setHasFixedSize(true);
+        recycler.setLayoutManager(new LinearLayoutManager(this));
         course_name = getIntent().getExtras().getString("course_name");
         ustaz = getIntent().getExtras().getString("ustaz");
         image = getIntent().getExtras().getString("image");
         setTitle(course_name);
         getItems();
+
+        back = findViewById(R.id.back);
+        title = findViewById(R.id.title);
+        title.setText(course_name);
+        back.setOnClickListener(v -> finish());
     }
 
 
@@ -80,8 +82,7 @@ public class PartActivity extends AppCompatActivity {
                         }
                     }
                     titleAdapter = new TitleAdapter(PartActivity.this, parts, course_name, image);
-                    title.setAdapter(titleAdapter);
-                    //l.setVisibility(View.VISIBLE);
+                    recycler.setAdapter(titleAdapter);
                     progress.setVisibility(View.GONE);
                 } else {
                     progress.setVisibility(View.GONE);

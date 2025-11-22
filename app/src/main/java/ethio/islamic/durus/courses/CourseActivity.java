@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -31,8 +33,8 @@ public class CourseActivity extends AppCompatActivity {
     private List<CourseObject> courseObjects = new ArrayList<>();
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
-    private List<Integer> codes = new ArrayList<>();
-    private int i = 1;
+    private ImageView back;
+    private TextView title;
     String ustaz = "";
 
     @Override
@@ -57,6 +59,10 @@ public class CourseActivity extends AppCompatActivity {
         ;
         addCourses();
 
+        back = findViewById(R.id.back);
+        title = findViewById(R.id.title);
+        title.setText(ustaz);
+        back.setOnClickListener(v -> finish());
     }
 
     private void addCourses() {
@@ -64,7 +70,6 @@ public class CourseActivity extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                i = 1;
                 courseObjects.clear();
                 for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     try {
