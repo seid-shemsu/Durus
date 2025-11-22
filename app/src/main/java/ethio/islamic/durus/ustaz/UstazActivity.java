@@ -1,17 +1,19 @@
 package ethio.islamic.durus.ustaz;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +26,8 @@ import java.util.List;
 import java.util.Objects;
 
 import ethio.islamic.durus.R;
+import ethio.islamic.durus.Settings;
+import ethio.islamic.durus.utils.Utils;
 
 public class UstazActivity extends AppCompatActivity {
     private List<UstazObject> ustazObjects = new ArrayList<>();
@@ -31,6 +35,8 @@ public class UstazActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     DatabaseReference databaseReference;
 
+
+    private TextView removeAds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,9 @@ public class UstazActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("ustaz");
         addUstaz();
+
+        removeAds = findViewById(R.id.remove_ads);
+        removeAds.setOnClickListener(v -> startActivity(new Intent(UstazActivity.this, Settings.class)));
     }
 
     private void addUstaz() {
@@ -69,5 +78,15 @@ public class UstazActivity extends AppCompatActivity {
                 Toast.makeText(UstazActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Utils.showAd(this)) {
+            removeAds.setVisibility(View.VISIBLE);
+        } else {
+            removeAds.setVisibility(View.GONE);
+        }
     }
 }

@@ -17,6 +17,18 @@
         android:textColor="@color/white"
         android:textSize="18sp" />
 
+    <TextView
+        android:id="@+id/remove_ads"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        android:fontFamily="@font/adlam_display"
+        android:text="Remove Ads"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

@@ -1,6 +1,11 @@
 package ethio.islamic.durus.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+
+import java.util.UUID;
+
+import ethio.islamic.durus.BuildConfig;
 
 public class Utils {
 
@@ -22,6 +27,56 @@ public class Utils {
     }
 
     public static boolean showAd(Context context) {
-        return context.getSharedPreferences("ad", Context.MODE_PRIVATE).getBoolean("show", false);
+        boolean show = context.getSharedPreferences("ad", Context.MODE_PRIVATE).getBoolean("show", false);
+        boolean isPaid = isPaid(context);
+        boolean passed = has24HoursPassed(context);
+        return show && !isPaid && passed;
     }
+
+    public static void setPaidUser(Context context, boolean isPaid) {
+        context.getSharedPreferences("user", Context.MODE_PRIVATE).edit().putBoolean("is_paid", isPaid).commit();
+    }
+
+    private static boolean isPaid(Context context) {
+        return context.getSharedPreferences("user", Context.MODE_PRIVATE).getBoolean("is_paid", false);
+    }
+
+    public static String getUUID(Context context) {
+        String uuid = context.getSharedPreferences("user", Context.MODE_PRIVATE).getString("UUID", "");
+        if (uuid.isEmpty()) {
+            saveUUID(context);
+            return getUUID(context);
+        }
+        return uuid;
+    }
+
+    private static void saveUUID(Context context) {
+        context.getSharedPreferences("user", Context.MODE_PRIVATE).edit().putString("UUID", UUID.randomUUID().toString()).commit();
+    }
+
+    private static final long HOURS_24 = 24 * 60 * 60 * 1000;
+    private static final long HOURS_24_DEBUG = 5 * 60 * 1000;
+
+    public static void logUserStartTimeOnce(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+        if (!prefs.contains("start_time")) {
+            long now = System.currentTimeMillis();
+            prefs.edit().putLong("start_time", now).apply();
+        }
+    }
+
+    private static boolean has24HoursPassed(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("user", Context.MODE_PRIVATE);
+        long savedTime = prefs.getLong("start_time", 0);
+        if (savedTime == 0) {
+            return false;
+        }
+        long now = System.currentTimeMillis();
+        if (BuildConfig.DEBUG) {
+            return (now - savedTime) >= HOURS_24_DEBUG;
+        } else {
+            return (now - savedTime) >= HOURS_24;
+        }
+    }
+
 }

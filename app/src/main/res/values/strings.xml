@@ -132,5 +132,9 @@
 
     <string name="thumbnail">https://i.ytimg.com/vi/%1$s/maxresdefault.jpg</string>
     <string name="update_message">A new version of our app is available. Please update to enjoy the latest features and improvements.</string>
+    <string name="payment_instruction">2) Send %1$d ETB to the following account:\n(%2$s / %3$s / %4$s)</string>
+    <!-- res/values/strings.xml -->
+    <string name="send_screenshot_instruction">3) Take a screenshot of the payment and send it along with your user ID to our Telegram:\n%1$s</string>
+
 
 </resources>

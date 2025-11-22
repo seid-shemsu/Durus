@@ -37,7 +37,8 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         MobileAds.initialize(this);
         AdMob.getInstance(this);
-
+        Utils.logUserStartTimeOnce(this);
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         new Handler().postDelayed(this::checkVersion, 2000);
         FirebaseDatabase.getInstance().getReference("configs")
                 .child("show_ads")
@@ -57,6 +58,24 @@ public class Splash extends AppCompatActivity {
                                     .putBoolean("show", false)
                                     .apply();
                         }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+        String id = Utils.getUUID(this);
+        FirebaseDatabase.getInstance().getReference("paid_users")
+                .child(id)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists())
+                            Utils.setPaidUser(Splash.this, true);
+                        else
+                            Utils.setPaidUser(Splash.this, false);
                     }
 
                     @Override

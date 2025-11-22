@@ -40,6 +40,9 @@
             android:name=".parts.PartActivity"
             android:exported="false" />
         <activity
+            android:name=".Settings"
+            android:exported="false" />
+        <activity
             android:name=".courses.CourseActivity"
             android:exported="false" />
         <activity
