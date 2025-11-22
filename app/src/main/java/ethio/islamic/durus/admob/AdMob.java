@@ -13,9 +13,11 @@ import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
+import ethio.islamic.durus.BuildConfig;
+
 public class AdMob {
-    private static final String AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917"; // DEV
-    //private static final String AD_UNIT_ID = "ca-app-pub-9737688387656254/6198058988"; // PROD
+    private static final String DEV_AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917"; // DEV
+    private static final String PROD_AD_UNIT_ID = "ca-app-pub-9027325451795162/3105460972"; // PROD
 
     private boolean isLoading = false;
     private RewardedAd rewardedAd = null;
@@ -44,10 +46,15 @@ public class AdMob {
         if (rewardedAd == null) {
             isLoading = true;
             AdRequest adRequest = new AdRequest.Builder().build();
-
+            String ad;
+            if (BuildConfig.DEBUG) {
+                ad = DEV_AD_UNIT_ID;
+            } else {
+                ad = PROD_AD_UNIT_ID;
+            }
             RewardedAd.load(
                     context,
-                    AD_UNIT_ID,
+                    ad,
                     adRequest,
                     new RewardedAdLoadCallback() {
                         @Override

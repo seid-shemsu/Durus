@@ -24,7 +24,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9737688387656254~9905655112" />
+            android:value="ca-app-pub-9027325451795162~7928458537" />
 
         <activity
             android:name=".player.VideoPlayManager"

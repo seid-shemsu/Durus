@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -41,7 +41,6 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
         View view = LayoutInflater.from(context).inflate(R.layout.part_item, parent, false);
         return new Holder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         //I have changed passed with lesson sharedPreference
@@ -49,14 +48,11 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.Holder> {
         PartObject part = parts.get(position);
         holder.title.setText(part.getName());
         try {
-            Picasso.get().load(context.getString(R.string.thumbnail, part.getYoutube())).into(holder.img);
+            Glide.with(holder.card).load(context.getString(R.string.thumbnail, part.getYoutube())).into(holder.img);
         } catch (Exception e) {
             e.printStackTrace();
-            Picasso.get().load(image).into(holder.img);
         }
-        Log.e("Music", "----------------------------------------------" + position);
-        Log.e("Music", part.getMusic());
-        if (part.getMusic().equalsIgnoreCase("music")) holder.download.setVisibility(View.GONE);
+        // if (part.getMusic().equalsIgnoreCase("music")) holder.download.setVisibility(View.GONE);
     }
 
     @Override

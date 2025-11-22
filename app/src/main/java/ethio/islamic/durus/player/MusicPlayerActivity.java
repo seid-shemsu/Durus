@@ -24,9 +24,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -56,7 +56,8 @@ public class MusicPlayerActivity extends AppCompatActivity {
         audio_link = getIntent().getExtras().getString("audio_link");
         image = getIntent().getExtras().getString("image");
         img = findViewById(R.id.image);
-        Picasso.get().load(image).into(img);
+
+        Glide.with(this).load(image).into(img);
 
         linearLayout = findViewById(R.id.musicplayer);
         startTimeField = findViewById(R.id.starttime);

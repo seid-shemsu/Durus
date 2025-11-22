@@ -1,5 +1,7 @@
 package ethio.islamic.durus.parts;
 
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 
 public class PartObject implements Serializable {
@@ -8,7 +10,7 @@ public class PartObject implements Serializable {
     public PartObject() {
     }
 
-    public PartObject(String name, String music, String youtube, String image) {
+    public PartObject(String name, @Nullable String music, String youtube, String image) {
         this.name = name;
         this.music = music;
         this.youtube = youtube;

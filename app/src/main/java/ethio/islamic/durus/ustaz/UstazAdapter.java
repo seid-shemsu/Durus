@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -48,7 +48,7 @@ public class UstazAdapter extends RecyclerView.Adapter<UstazAdapter.Holder> {
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         final UstazObject ustazObject = ustazObjects.get(position);
-        Picasso.get().load(ustazObject.getImg()).into(holder.img);
+        Glide.with(holder.img).load(ustazObject.getImg()).into(holder.img);
         holder.name.setText(ustazObject.getName());
     }
 

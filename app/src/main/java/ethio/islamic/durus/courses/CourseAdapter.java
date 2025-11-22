@@ -14,7 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
+
+import com.bumptech.glide.Glide;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -48,7 +49,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ImageViewH
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
         final CourseObject courseObject = courseObjects.get(position);
         //holder.course_name.setText(courseObject.getCourse_name());
-        Picasso.get().load(courseObject.getImg_url()).into(holder.course_img);
+        Glide.with(holder.course_img).load(courseObject.getImg_url()).into(holder.course_img);
     }
 
     @Override

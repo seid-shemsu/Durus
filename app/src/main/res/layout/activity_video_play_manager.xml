@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg__"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context=".player.VideoPlayManager">
 
     <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView

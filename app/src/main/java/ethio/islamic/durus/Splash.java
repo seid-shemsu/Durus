@@ -68,7 +68,7 @@ public class Splash extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Log.e("Latest version", Objects.requireNonNull(snapshot.getValue()) + "");
-                        if (Utils.compareVersions(Objects.requireNonNull(snapshot.getValue()).toString(), CURRENT_VERSION)) {
+                        if (Utils.compareVersions(Objects.requireNonNull(snapshot.getValue()).toString(), BuildConfig.VERSION_NAME)) {
                             startActivity(new Intent(Splash.this, UpdateActivity.class));
                         } else {
                             startActivity(new Intent(Splash.this, UstazActivity.class));
